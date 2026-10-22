@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Abdi Dadu Woya's personal website, biography, photo gallery and contact information.">
+  <title>AbdiRoyal | Personal Website</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --blue: #064cff; --deep-blue: #062d91; --yellow: #fff000;
+      --pink: #ff1685; --dark: #111b30; --text: #273552;
+      --facebook: #1877F2; --tiktok: #000; --telegram: #26A5E4;
+    }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { font-family: Arial, Helvetica, sans-serif; color: var(--text); background: #fff; line-height: 1.5; }
+    img { display: block; max-width: 100%; }
+    a { -webkit-tap-highlight-color: transparent; }
+
+    /* NAVBAR */
+    .navbar { width: 100%; min-height: 50px; background: var(--blue); display: flex; justify-content: center; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+    .nav-container { width: 100%; max-width: 1000px; padding: 7px 12px; display: flex; align-items: center; justify-content: space-between; gap: 20px; position: relative; }
+    .logo { text-decoration: none; color: white; font-size: 29px; font-weight: 800; letter-spacing: -1px; white-space: nowrap; }
+    .logo span { color: var(--yellow); }
+    /* Menu is hidden initially on both desktop and mobile */
+    .nav-content { display: none; position: absolute; top: 100%; right: 12px; min-width: 220px; padding: 12px; background: var(--blue); border-radius: 0 0 8px 8px; box-shadow: 0 5px 12px rgba(0,0,0,.2); }
+    .nav-content.open { display: flex; flex-direction: column; align-items: stretch; gap: 14px; }
+    .nav-links { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .nav-links a { display: block; color: white; font-size: 13px; font-weight: 700; text-decoration: none; padding: 10px 8px; border-bottom: 2px solid transparent; }
+    .nav-links a:hover, .nav-links a.active { color: var(--yellow); border-bottom-color: var(--yellow); }
+    .social-icons { display: flex; align-items: center; gap: 8px; padding: 5px 8px; }
+    .social-icon { display: inline-flex; justify-content: center; align-items: center; width: 27px; height: 27px; border-radius: 50%; color: #fff; text-decoration: none; transition: transform .2s, opacity .2s; }
+    .social-icon:hover { transform: translateY(-2px); opacity: .85; }
+    .social-icon svg { display: block; width: 15px; height: 15px; fill: currentColor; }
+    .facebook { background: var(--facebook); } .tiktok { background: var(--tiktok); } .telegram { background: var(--telegram); }
+    .menu-toggle { display: block; border: none; background: transparent; color: white; font-size: 28px; line-height: 1; cursor: pointer; padding: 2px 5px; }
+
+    /* HERO */
+    .hero { min-height: 308px; background: linear-gradient(90deg, rgba(0,35,135,.98) 0%, rgba(0,45,150,.92) 38%, rgba(0,45,150,.30) 100%), url("5818826267220971863.jpg") center 38% / cover no-repeat; display: flex; align-items: center; color: white; }
+    .hero-content { width: 100%; max-width: 1000px; margin: auto; padding: 28px 12px; }
+    .hero-kicker { color: var(--yellow); font-size: 14px; font-weight: 800; margin-bottom: 4px; }
+    .hero h1 { font-size: clamp(30px, 4vw, 43px); line-height: 1.04; margin-bottom: 10px; color: white; letter-spacing: -.5px; }
+    .hero h1 span { color: var(--yellow); display: block; }
+    .hero-description { max-width: 405px; font-size: 14px; line-height: 1.45; margin-bottom: 12px; }
+    .hero-links { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-link { display: inline-block; color: white; text-decoration: none; font-size: 12px; font-weight: 700; padding: 9px 20px; border-radius: 25px; border: 1px solid white; transition: background .2s, color .2s; }
+    .hero-link.primary { background: var(--blue); border-color: var(--blue); }
+    .hero-link:hover { background: white; color: var(--blue); }
+
+    /* ABOUT: soft blue-violet background with a clean content card */
+    .about-section {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 42px 18px 48px;
+      background: linear-gradient(135deg, #eef3ff 0%, #f8f7ff 48%, #e2eaff 100%);
+    }
+    .about-section::before,
+    .about-section::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .about-section::before {
+      width: 280px;
+      height: 280px;
+      top: -100px;
+      left: -80px;
+      background: radial-gradient(circle, rgba(6,76,255,.15), rgba(6,76,255,0) 70%);
+    }
+    .about-section::after {
+      width: 340px;
+      height: 340px;
+      right: -120px;
+      bottom: -160px;
+      background: radial-gradient(circle, rgba(255,22,133,.12), rgba(255,22,133,0) 70%);
+    }
+    .section-heading { text-align: center; margin-bottom: 16px; }
+    .section-heading h2 { font-size: 28px; line-height: 1.4; color: #07368f; }
+    .section-heading p { font-size: 14px; color: #65718c; }
+    .about-container {
+      max-width: 980px;
+      margin: 18px auto 0;
+      display: grid;
+      grid-template-columns: 330px 1fr;
+      align-items: center;
+      gap: 30px;
+      padding: 24px;
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 20px;
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 18px 45px rgba(26, 54, 120, .12);
+      backdrop-filter: blur(8px);
+    }
+    .about-photo {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      object-position: center 30%;
+      border: 5px solid white;
+      border-radius: 15px;
+      box-shadow: 0 12px 28px rgba(13, 39, 95, .2);
+    }
+    .story h3 { font-size: 21px; color: var(--pink); margin-bottom: 8px; }
+    .story p { font-size: 13px; line-height: 1.65; margin-bottom: 11px; overflow-wrap: anywhere; }
+    .motto { margin-top: 14px; padding: 12px 14px 12px 18px; background: linear-gradient(110deg, #e8efff, #fff0f7); border-left: 4px solid var(--blue); border-radius: 8px; }
+    .motto h4 { font-size: 13px; color: #273552; margin-bottom: 3px; }
+    .motto p { font-size: 12px; font-style: italic; margin-bottom: 0; }
+
+    /* GALLERY: rich midnight-blue background with a subtle glow */
+    .gallery-section {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 42px 18px 46px;
+      background:
+        radial-gradient(ellipse at 8% 8%, rgba(255,22,133,.22), transparent 35%),
+        radial-gradient(ellipse at 92% 85%, rgba(0,190,255,.20), transparent 38%),
+        linear-gradient(135deg, #07132d 0%, #102b62 52%, #111b3c 100%);
+    }
+    .gallery-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .16;
+      background-image: radial-gradient(rgba(255,255,255,.65) .7px, transparent .7px);
+      background-size: 19px 19px;
+    }
+    .gallery-section .section-heading h2 { color: #fff; font-size: 28px; }
+    .gallery-section .section-heading p { color: #d6e2ff; }
+    .gallery-container { max-width: 900px; margin: 22px auto 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 14px;
+      background: #182b52;
+      border: 1px solid rgba(255,255,255,.28);
+      box-shadow: 0 14px 30px rgba(0,0,0,.25);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .gallery-item:hover { transform: translateY(-5px); box-shadow: 0 20px 38px rgba(0,0,0,.35); }
+    .gallery-item img { width: 100%; height: 300px; object-fit: cover; transition: transform .4s; }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .album-link { display: block; width: fit-content; margin: 24px auto 0; background: linear-gradient(100deg, #064cff, #7b35db); color: white; text-decoration: none; font-size: 12px; font-weight: 700; padding: 11px 23px; border: 1px solid rgba(255,255,255,.25); border-radius: 24px; box-shadow: 0 8px 20px rgba(0,0,0,.2); transition: transform .2s, box-shadow .2s; }
+    .album-link:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(0,0,0,.3); }
+
+    /* CONTACT */
+    .contact-section { background: linear-gradient(120deg, #19243a, #101a2d); color: white; text-align: center; padding: 28px 16px; }
+    .contact-section h2 { font-size: 24px; margin-bottom: 10px; }
+    .contact-section p { font-size: 13px; margin: 8px 0; }
+    .email-link { color: var(--yellow); overflow-wrap: anywhere; }
+    .contact-section .social-icons { justify-content: center; margin-top: 12px; }
+    .contact-section .social-icon { width: 32px; height: 32px; }
+    .contact-section .social-icon svg { width: 17px; height: 17px; }
+    .footer { background: #0b1220; color: white; text-align: center; padding: 14px 10px; }
+    .footer p { font-size: 11px; }
+
+    /* RESPONSIVE */
+    @media (min-width: 1400px) { .nav-container, .hero-content { max-width: 1100px; } }
+    @media (max-width: 900px) {
+      .about-container { grid-template-columns: minmax(230px, .8fr) 1.2fr; gap: 22px; padding: 20px; }
+      .about-photo { height: 300px; }
+      .gallery-container { gap: 16px; }
+    }
+    @media (max-width: 700px) {
+      html { scroll-padding-top: 60px; }
+      .navbar { min-height: 55px; }
+      .nav-container { padding: 7px 14px; }
+      .about-section, .gallery-section { padding: 32px 14px 36px; }
+      .about-container { grid-template-columns: 1fr; gap: 18px; max-width: 520px; padding: 16px; border-radius: 16px; }
+      .about-photo { height: 320px; }
+      .story p { font-size: 13px; }
+      .gallery-container { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .gallery-item img { height: 250px; }
+      .hero { min-height: 330px; background-position: 60% center; }
+      .hero-content { padding: 28px 18px; }
+    }
+    @media (max-width: 400px) {
+      .logo { font-size: 25px; }
+      .gallery-item img { height: 220px; }
+      .about-photo { height: 280px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR: links and social icons are hidden until the menu icon is clicked -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#home" class="logo">Abdi<span>Royal</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navContent">☰</button>
+      <div class="nav-content" id="navContent">
+        <nav aria-label="Main navigation">
+          <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#gallery">My Gallery</a></li>
+            <li><a href="#contact">Contact Me</a></li>
+          </ul>
+        </nav>
+        <div class="social-icons" aria-label="Social media links">
+          <a class="social-icon facebook" href="https://web.facebook.com/profile.php?id=61575807162735" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.8-.1-1.6-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.4v2.3H7.3v3.2h2.8V21z"/></svg>
+          </a>
+          <a class="social-icon tiktok" href="https://www.tiktok.com/@abdi_royal5333" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.6 7.1a6.8 6.8 0 0 1-4-1.3v8.3a6.1 6.1 0 1 1-5.3-6.1v3.4a2.8 2.8 0 1 0 1.9 2.7V2h3.4c.3 2.1 1.8 3.7 4 4.1z"/></svg>
+          </a>
+          <a class="social-icon telegram" href="https://t.me/Bulitij5333" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 3.5 18.3 20c-.2 1.2-.9 1.5-1.9.9l-5.2-3.8-2.5 2.4c-.3.3-.5.5-1 .5l.4-5.3 9.7-8.8c.4-.4-.1-.6-.6-.2L5.2 13.3.1 11.7c-1.1-.4-1.1-1.1.2-1.6L20.1 2.5c.9-.3 1.7.2 1.4 1z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <p class="hero-kicker">WELCOME TO MY PERSONAL WEBSITE</p>
+        <h1>Hello, I'm <span>Abdi Dadu Woya</span></h1>
+        <p class="hero-description">A Computer Science student at Jimma University's Agaro Campus, working toward a brighter future through education and hard work.</p>
+        <div class="hero-links">
+          <a href="#about" class="hero-link primary">Discover My Story</a>
+          <a href="#gallery" class="hero-link">Explore My Photos</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about-section" id="about">
+      <div class="section-heading">
+        <h2>About My Life</h2>
+        <p>This Is My Best Photo of the Year</p>
+      </div>
+      <div class="about-container">
+        <div><img src="5818826267220971863.jpg" alt="Portrait of Abdi Dadu Woya" class="about-photo" loading="lazy"></div>
+        <div class="story">
+          <h3>My Story</h3>
+          <p>My name is <strong>Abdi Dadu Woya</strong>. I was born in 1999 in Batu City to my mother, Amane Mieso, and my father, Dadu Woya.</p>
+          <p>I began my kindergarten education at the age of two and continued my elementary education at Aleelu Primary School. After successfully passing the Grade Eight Certificate Examination with good results, I continued my secondary and preparatory education at Meda Hayota School.</p>
+          <p>After completing my preparatory education, I took the university entrance examination and achieved good results. As a result, I joined Jimma University in 2018 E.C. (Ethiopian Calendar).</p>
+          <p>Currently, thanks to Almighty Allah, I am a Computer Science student at Jimma University's Agaro Campus. I am working hard to improve my knowledge, develop my skills, and prepare myself for a successful future in the field of technology.</p>
+          <p>I believe that education, hard work, patience, and determination are the keys to success. My goal is to complete my university education successfully, become a competent computer science professional, and use my knowledge and skills to contribute positively to the development of my community and my country.</p>
+          <p>Finally, I would like to thank Almighty Allah, my parents, my teachers, and everyone who has supported me throughout my educational journey. Their encouragement and support have played an important role in helping me reach this stage of my life.</p>
+          <div class="motto"><h4>My motto:</h4><p>Education, hard work, patience, and determination are the keys to success.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHOTO GALLERY -->
+    <section class="gallery-section" id="gallery">
+      <div class="section-heading"><h2>My Photo Gallery</h2><p>Here are some of my favorite photos.</p></div>
+      <div class="gallery-container">
+        <div class="gallery-item"><img src="5904432855285173402.jpg" alt="Abdi wearing a blue checked shirt" loading="lazy"></div>
+        <div class="gallery-item"><img src="abdi2.jpg" alt="Abdi wearing a black jacket" loading="lazy"></div>
+        <div class="gallery-item"><img src="5904432855285173403.jpg" alt="Abdi wearing a white shirt and sunglasses" loading="lazy"></div>
+      </div>
+      <a href="#" id="familyAlbum" class="album-link">My family photo album</a>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section" id="contact">
+      <h2>Contact Me</h2>
+      <p>Thank you for visiting my website! I would be happy to connect with you.</p>
+      <p>Email: <a class="email-link" href="mailto:abdidadu684@gmail.com">abdidadu684@gmail.com</a></p>
+      <div class="social-icons" aria-label="Contact and social links">
+        <a class="social-icon facebook" href="https://web.facebook.com/profile.php?id=61575807162735" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.8-.1-1.6-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.4v2.3H7.3v3.2h2.8V21z"/></svg>
+        </a>
+        <a class="social-icon tiktok" href="https://www.tiktok.com/@abdi_royal5333" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.6 7.1a6.8 6.8 0 0 1-4-1.3v8.3a6.1 6.1 0 1 1-5.3-6.1v3.4a2.8 2.8 0 1 0 1.9 2.7V2h3.4c.3 2.1 1.8 3.7 4 4.1z"/></svg>
+        </a>
+        <a class="social-icon telegram" href="https://t.me/Bulitij5333" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 3.5 18.3 20c-.2 1.2-.9 1.5-1.9.9l-5.2-3.8-2.5 2.4c-.3.3-.5.5-1 .5l.4-5.3 9.7-8.8c.4-.4-.1-.6-.6-.2L5.2 13.3.1 11.7c-1.1-.4-1.1-1.1.2-1.6L20.1 2.5c.9-.3 1.7.2 1.4 1z"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer"><p>Author: Abdi Dadu Woya &nbsp; | &nbsp; © 2026 AbdiRoyal. All rights reserved.</p></footer>
+
+  <!-- JAVASCRIPT: menu behaviour and family album password -->
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navContent = document.getElementById("navContent");
+
+    menuToggle.addEventListener("click", function () {
+      const isOpen = navContent.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    navContent.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navContent.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+        menuToggle.textContent = "☰";
+      });
+    });
+
+    document.getElementById("familyAlbum").addEventListener("click", function (event) {
+      event.preventDefault();
+      const password = prompt("Enter the family photo album password:");
+      if (password === null) return;
+      if (password === "5333") {
+        window.open("https://t.me/+L3DSN1eojBo5ZDdk", "_blank", "noopener,noreferrer");
+      } else {
+        alert("Incorrect password. Please try again.");
+      }
+    });
+  </script>
+</body>
+</html>
